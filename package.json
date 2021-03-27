@@ -1,10 +1,10 @@
 {
   "name": "common-infra-jenkins",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "description": "Jenkins Config",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "docker build -t nihil-jenkins:test .",
     "prepare": "husky install",
     "commitlint": "commitlint",
     "release": "standard-version",

@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  jenkins:
+    image: nihil-jenkins:0.0.0
+    container_name: nihil-jenkins
+    deploy:
+      restart_policy:
+        condition: any
+        window: 60s
+        delay: 5s
+        max_attempts: 5
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      nihil-net:
+        aliases:
+          - nihil-jenkins
+
+networks:
+  nihil-net:
+    external: true
