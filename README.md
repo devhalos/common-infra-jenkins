@@ -1,6 +1,6 @@
 # Common Infra Jenkins
 
-Jenkins configuration and pipeline shared libraries
+Jenkins configuration and pipeline
 
 ## Getting Started
 
@@ -9,21 +9,68 @@ Jenkins configuration and pipeline shared libraries
 - Nodejs
 - Docker
 
+### Shared Libraries
+
+The information for shared libraries used by the jenkins instance can be found [here](https://github.com/devhalos/common-infra-jenkins-libs)
+
+### Job DSL Plugin
+
+Api documentation can be viewed in
+
+```
+{jenkins-base-url}/job-dsl/api-viewer/index.html
+```
+
 ### Installing
 
-Install npm dependencies. It is needed for git message linting and for generating changelog for release.
+Install npm dependencies. It is required for git message linting and for generating changelog for release.
 
 ```shell
-npm ci
+npm i
 ```
 
 ## Running the tests
 
-TBD
+```shell
+npm test
+```
+
+### Build
+
+#### Development
+
+Follow [semver](https://semver.org/) convention for naming the image tag
+
+```shell
+docker build -t nihil-jenkins:{image-tag} .
+docker build -t nihil-jenkins:0.0.1-alpha .
+docker build -t nihil-jenkins:0.0.1 .
+```
+
+#### Production
+```shell
+docker build -t nihil-jenkins:{next-version} .
+```
 
 ## Deployment
 
-### Deploy Jenkins to ECS
+### Deploy in Local
+
+#### Prepare
+
+- Build image. See [Build](#build) section
+- Set environment variables required for the deployment.
+    1. Copy ./dev/.env to ./.env. It contains the list of env vars without value
+    2. Populate values of the env vars in ./.env file
+
+#### Deploy
+
+```shell
+sh deployment/deploy-local.sh {stack-name}
+sh deployment/deploy-local.sh nihil-ci
+```
+
+### Deploy in ECS
 
 TBD
 
