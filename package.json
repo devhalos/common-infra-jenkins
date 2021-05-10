@@ -1,0 +1,34 @@
+{
+    "name": "common-infra-jenkins",
+    "version": "0.1.0",
+    "description": "Jenkins Config",
+    "main": "index.js",
+    "scripts": {
+        "test": "docker build -t nihil-jenkins:test .",
+        "prepare": "husky install",
+        "commitlint": "commitlint",
+        "release": "standard-version",
+        "release:patch": "standard-version --release-as patch",
+        "release:minor": "standard-version --release-as minor",
+        "release:major": "standard-version --release-as major"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/devhalos/common-infra-jenkins.git"
+    },
+    "keywords": [
+        "jenkins"
+    ],
+    "author": "jayson ojeda",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/devhalos/common-infra-jenkins/issues"
+    },
+    "homepage": "https://github.com/devhalos/common-infra-jenkins#readme",
+    "devDependencies": {
+        "@commitlint/cli": "^12.0.1",
+        "@commitlint/config-conventional": "^12.0.1",
+        "husky": "^5.1.3",
+        "standard-version": "^9.1.1"
+    }
+}

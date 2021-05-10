@@ -1,0 +1,36 @@
+version: '3.3'
+
+services:
+  jenkins:
+    image: 448243285977.dkr.ecr.ap-southeast-1.amazonaws.com/nihil-jenkins:${JENKINS_IMAGE_TAG}
+    container_name: nihil-jenkins
+    deploy:
+      restart_policy:
+        condition: any
+        window: 60s
+        delay: 5s
+        max_attempts: 5
+    ports:
+      - 8080:8080
+      - 50000:50000
+    environment:
+      - GITHUB_USERNAME_DEVHALOS=${GITHUB_USERNAME_DEVHALOS}
+      - GITHUB_PASSWORD_DEVHALOS=${GITHUB_PASSWORD_DEVHALOS}
+      - GITHUB_TOKEN_JOBS_DEVHALOS=${GITHUB_TOKEN_JOBS_DEVHALOS}
+      - GITHUB_TOKEN_DEVHALOS=${GITHUB_TOKEN_DEVHALOS}
+      - SONARQUBE_TOKEN_DEVHALOS=${SONARQUBE_TOKEN_DEVHALOS}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - nihil-jenkins-data:/var/jenkins_home
+    networks:
+      nihil-net:
+        aliases:
+          - nihil-jenkins
+
+volumes:
+  nihil-jenkins-data:
+    external: true
+
+networks:
+  nihil-net:
+    external: true
