@@ -1,0 +1,1 @@
+sh ./dev/deploy-local.sh ${1:-nihil-ci} "-c docker-compose.dev.yml"
