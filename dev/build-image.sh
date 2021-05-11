@@ -1,0 +1,1 @@
+docker build -t nihil-jenkins:${1:-latest} .

@@ -1,0 +1,5 @@
+version: '3.3'
+
+services:
+  jenkins:
+    image: nihil-jenkins:latest
