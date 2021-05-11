@@ -66,7 +66,8 @@ docker build -t nihil-jenkins:{next-version} .
 #### Deploy
 
 ```shell
-sh deployment/deploy-local.sh {stack-name}
+sh deployment/deploy-local.sh {stack-name} {optional-compose-flags}
+sh deployment/deploy-local-dev.sh {stack-name}
 sh deployment/deploy-local.sh nihil-ci
 ```
 
