@@ -2,47 +2,28 @@ jenkins:
   systemMessage: "Jenkins - Nihil"
   numExecutors: 4
   mode: NORMAL
-
-unclassified:
-  location:
-    adminAddress: "jayson.unto.ojeda@gmail.com"
-    url: "http://localhost:8080/"
-  gitHubPluginConfig:
-    configs:
-      - credentialsId: "github-token-devhalos"
-        name: "github-devhalos"
-    hookUrl: "http://localhost:8080/github-webhook/"
-  sonarGlobalConfiguration:
-    buildWrapperEnabled: true
-    installations:
-      - credentialsId: "sonarqube-token-devhalos"
-        name: "sonarqube-devhalos"
-        serverUrl: "https://sonarcloud.io"
-        triggers:
-          skipScmCause: false
-          skipUpstreamCause: false
-  globalLibraries:
-    libraries:
-      - defaultVersion: "main"
-        name: "shared-libs-nihil"
-        retriever:
-          modernSCM:
-            scm:
-              github:
-                configuredByUrl: true
-                id: "48a82f6a-9df6-4f53-aaf2-3b74dddfa451"
-                repoOwner: "devhalos"
-                repository: "common-infra-jenkins-libs"
-                repositoryUrl: "https://github.com/devhalos/common-infra-jenkins-libs/"
-                traits:
-                  - gitHubBranchDiscovery:
-                      strategyId: 1
-                  - gitHubPullRequestDiscovery:
-                      strategyId: 1
-                  - gitHubForkDiscovery:
-                      strategyId: 1
-                      trust: "gitHubTrustPermissions"
-  simple-theme-plugin:
-    elements:
-      - cssUrl:
-          url: "https://devhalos.s3-ap-southeast-1.amazonaws.com/theme/material-blue.css"
+  clouds:
+    - ecs:
+        allowedOverrides: "inheritFrom,label,memory,cpu,image"
+        credentialsId: ""
+        cluster: ${JENKINS_ECS_CLUSTER_NAME}
+        name: "fargate-cloud"
+        regionName: ${JENKINS_ECS_CLUSTER_REGION}
+        retentionTimeout: 10
+        jenkinsUrl: "http://localhost:8080"
+        templates:
+          - assignPublicIp: true
+            cpu: "512"
+            image: "jenkins/inbound-agent"
+            label: "ecs-fargate-agent-nihil-jenkins"
+            launchType: "FARGATE"
+            memory: 0
+            memoryReservation: 1024
+            networkMode: "awsvpc"
+            privileged: false
+            remoteFSRoot: "/home/jenkins"
+            securityGroups: ${JENKINS_ECS_AGENT_SECURITY_GROUPS}
+            sharedMemorySize: 0
+            subnets: ${JENKINS_ECS_SUBNETS}
+            templateName: "ecs-fargate-agent-nihil-jenkins"
+            uniqueRemoteFSRoot: false
