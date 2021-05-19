@@ -3,7 +3,8 @@
 pipeline {
     agent {
         ecs {
-            inheritFrom 'ecs-fargate-agent-nihil-jenkins'
+            inheritFrom 'ecs-fargate-agent'
+            label 'ecs-fargate-agent-nihil-jenkins'
         }
     }
 
