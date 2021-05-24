@@ -25,6 +25,8 @@ services:
       - GITHUB_TOKEN_JOBS_DEVHALOS=${GITHUB_TOKEN_JOBS_DEVHALOS}
       - GITHUB_TOKEN_DEVHALOS=${GITHUB_TOKEN_DEVHALOS}
       - SONARQUBE_TOKEN_DEVHALOS=${SONARQUBE_TOKEN_DEVHALOS}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - nihil-jenkins-data:/var/jenkins_home

@@ -1,12 +1,12 @@
 unclassified:
   location:
     adminAddress: "jayson.unto.ojeda@gmail.com"
-    url: "http://localhost:8080/"
+    url: "${JENKINS_URL}"
   gitHubPluginConfig:
     configs:
       - credentialsId: "github-token-devhalos"
         name: "github-devhalos"
-    hookUrl: "http://localhost:8080/github-webhook/"
+    hookUrl: "${JENKINS_URL}/github-webhook/"
   sonarGlobalConfiguration:
     buildWrapperEnabled: true
     installations:
