@@ -1,8 +1,15 @@
+#!*groovy*
+
 pipeline {
-    agent any
+    agent {
+        ecs {
+            inheritFrom 'ecs-fargate-agent'
+            label 'ecs-fargate-agent-nihil-jenkins'
+        }
+    }
 
     stages {
-        stage('build-initialize') {
+        stage('init') {
             steps {
                 echo 'hello world'
             }

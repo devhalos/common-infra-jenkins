@@ -1,0 +1,43 @@
+unclassified:
+  location:
+    adminAddress: "jayson.unto.ojeda@gmail.com"
+    url: "${JENKINS_URL}"
+  gitHubPluginConfig:
+    configs:
+      - credentialsId: "github-token-devhalos"
+        name: "github-devhalos"
+    hookUrl: "${JENKINS_URL}/github-webhook/"
+  sonarGlobalConfiguration:
+    buildWrapperEnabled: true
+    installations:
+      - credentialsId: "sonarqube-token-devhalos"
+        name: "sonarqube-devhalos"
+        serverUrl: "https://sonarcloud.io"
+        triggers:
+          skipScmCause: false
+          skipUpstreamCause: false
+  globalLibraries:
+    libraries:
+      - defaultVersion: "main"
+        name: "shared-libs-nihil"
+        retriever:
+          modernSCM:
+            scm:
+              github:
+                configuredByUrl: true
+                id: "48a82f6a-9df6-4f53-aaf2-3b74dddfa451"
+                repoOwner: "devhalos"
+                repository: "common-infra-jenkins-libs"
+                repositoryUrl: "https://github.com/devhalos/common-infra-jenkins-libs/"
+                traits:
+                  - gitHubBranchDiscovery:
+                      strategyId: 1
+                  - gitHubPullRequestDiscovery:
+                      strategyId: 1
+                  - gitHubForkDiscovery:
+                      strategyId: 1
+                      trust: "gitHubTrustPermissions"
+  simple-theme-plugin:
+    elements:
+      - cssUrl:
+          url: "https://devhalos.s3-ap-southeast-1.amazonaws.com/theme/material-blue.css"
